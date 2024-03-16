@@ -1,0 +1,7 @@
+{
+  "name": "attendence_system",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
