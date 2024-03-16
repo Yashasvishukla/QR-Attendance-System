@@ -1,0 +1,8 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "attendence_system",
+	"webDir": "www",
+	"server": {
+		"androidScheme": "https"
+	}
+}
