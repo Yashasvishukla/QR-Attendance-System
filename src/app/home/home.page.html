@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>PV Institute</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- About Section -->
+  <ion-card>
+    <img
+      alt="Silhouette of mountains"
+      src="https://ionicframework.com/docs/img/demos/card-media.png"
+    />
+    <ion-card-content>
+      <ion-card-title>About Us</ion-card-title>
+      <p>Our coaching center provides top-notch education...</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Courses Section -->
+
+  <ion-card>
+    <ion-card-content>
+      Courses
+      <ion-list>
+        <ion-item *ngFor="let course of courses">
+          <ion-card-content>
+            <ion-card-title>{{ course.name }}</ion-card-title>
+            <p>{{ course.description }}</p>
+          </ion-card-content>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Testimonials Section -->
+  <ion-card>
+    <ion-card-content>
+      Testimonials
+      <ion-list>
+        <ion-card>
+          <ion-item *ngFor="let testimonial of testimonials">
+            <ion-avatar slot="start">
+              <img src="{{ testimonial.image }}" />
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ testimonial.name }}</h2>
+              <p>{{ testimonial.message }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Contact Section -->
+  <ion-card>
+    <ion-card-content>
+      Contact Us
+      <ion-list>
+        <ion-item>
+          <ion-icon size="small" src="assets/icon/mail-outline.svg"></ion-icon>
+          <ion-label class="padding-left">contact.com</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon
+            size="small"
+            src="assets/icon/location-outline.svg"
+          ></ion-icon>
+          <ion-label class="padding-left">address</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon size="small" src="assets/icon/call-outline.svg"></ion-icon>
+          <ion-label class="padding-left">phone number</ion-label>
+        </ion-item>
+        <!-- Add more contact info -->
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,54 @@
+
+<!-- 
+<ion-content [fullscreen]="true">
+    <ngx-kjua
+    [text]="'hello'"
+    [renderAsync]="false"
+    [render]="'svg'"
+    [crisp]="true"
+    [minVersion]="8"
+    [ecLevel]="'H'"
+    [size]="200"
+    [fill]="'#333'"
+    [back]="'#fff'"
+    [rounded]="100"
+    [quiet]="1"
+    [mode]="'plain'"
+    [mSize]="40"
+    [mPosX]="50"
+    [mPosY]="50"
+    [fontname]="'sans-serif'"
+    [fontcolor]="'#ff9818'"
+    [cssClass]="'image-auto'"
+  ></ngx-kjua>
+</ion-content> -->
+
+
+<!-- In your Angular template (e.g., user-info.component.html) -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>User Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()" style="margin-top: 2rem;">
+    <ion-item>
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input formControlName="firstName" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input formControlName="lastName" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Phone Number</ion-label>
+      <ion-input formControlName="phoneNumber" type="tel"></ion-input>
+    </ion-item>
+    <ion-button type="submit" expand="block">Submit</ion-button>
+  </form>
+</ion-content>

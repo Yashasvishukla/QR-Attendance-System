@@ -1,0 +1,27 @@
+<ion-content [fullscreen]="false">
+  <zxing-scanner
+    #scanner
+    *ngIf="(startCamera$ | async)"
+    [ngClass]="['qr-overlay']"
+    [enable]="(enable$ | async) ?? false"
+    [autostart]="true"
+    [device]="(selectedDevice$ | async) ?? undefined"
+    [formats]="allowedFormats"
+    (permissionResponse)="onPermissionResponse($event)"
+    (camerasFound)="devices$.next($event)"
+    (scanSuccess)="scanSuccess$.next($event)"
+    (scanError)="scanError($event)"
+  ></zxing-scanner>
+
+
+
+  <ion-alert
+  [isOpen]="isAlertOpen"
+  header="Successfully Marked your Attendance !!"
+  message="You have successfully marked your attendance for the day. Thank you for using our app. Have a great day ahead."
+  [buttons]="alertButtons"
+  (didDismiss)="setOpen(false)"
+></ion-alert>
+
+
+</ion-content>

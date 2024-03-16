@@ -1,0 +1,11 @@
+.qr-overlay {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 95%; /* Adjust size as needed */
+  height: 40%; /* Adjust size as needed */
+  transform: translate(-50%, -50%);
+  border: 2px solid white;
+  box-sizing: border-box;
+  /* Additional styles for the overlay appearance */
+}
