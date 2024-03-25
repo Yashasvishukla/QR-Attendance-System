@@ -8,11 +8,15 @@ import {
   IonList,
   IonItem,
   IonLabel,
-  IonButton,
-} from '@ionic/angular/standalone';
+  IonButton, IonCardContent, IonCard, IonFooter } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { NgxKjuaComponent } from 'ngx-kjua';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { max } from 'rxjs';
 
 @Component({
@@ -20,7 +24,7 @@ import { max } from 'rxjs';
   templateUrl: 'user.page.html',
   styleUrls: ['user.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonCardContent, 
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -32,18 +36,28 @@ import { max } from 'rxjs';
     IonItem,
     ReactiveFormsModule,
     IonLabel,
-    IonButton
+    IonButton,
+    IonCard,
+    IonFooter
   ],
 })
 export class UserPage {
-
   userFormGroup: FormGroup;
   constructor(private formBuilder: FormBuilder) {
     this.userFormGroup = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(10), Validators.maxLength(10)]],
+      phoneNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[0-9]+$'),
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ],
+      ],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 

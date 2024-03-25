@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login/SignUp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="login-container">
+  <ion-card style="margin-top: 15rem">
+    <form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
+      <ion-card-content
+        style="
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        "
+      >
+        <ion-input
+          mode="md"
+          label="Username/Email"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Enter username/email"
+          formControlName="username"
+        ></ion-input>
+
+        <ion-input
+          mode="md"
+          label="Password"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Enter password"
+          type="password"
+          formControlName="password"
+        ></ion-input>
+      </ion-card-content>
+    </form>
+
+    <ion-footer style="display: flex; flex-direction: row">
+      <ion-button
+        [disabled]="!userFormGroup.valid"
+        color="primary"
+        (click)="login()"
+        >Login</ion-button
+      >
+      <ion-button routerLink="/register" color="danger">Register</ion-button>
+    </ion-footer>
+  </ion-card>
+</ion-content>

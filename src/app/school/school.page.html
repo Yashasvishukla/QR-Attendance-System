@@ -1,0 +1,183 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>School Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="login-container">
+  <ion-content [fullscreen]="true">
+    <ion-card style="margin-top: 8rem">
+      <form
+        [formGroup]="userFormGroup"
+        (ngSubmit)="onSubmit()"
+        style="margin-top: 2rem"
+      >
+        <ion-card-content
+          style="
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+          "
+        >
+          <ion-input
+            mode="md"
+            label="School Name"
+            label-placement="floating"
+            fill="outline"
+            placeholder="Enter School Name"
+            formControlName="name"
+          ></ion-input>
+
+          <ion-input
+            mode="md"
+            label="School Address"
+            label-placement="floating"
+            fill="outline"
+            placeholder="Enter School Address"
+            formControlName="address"
+          ></ion-input>
+
+          <ion-input
+            mode="md"
+            label="Phone number"
+            label-placement="floating"
+            fill="outline"
+            placeholder="Enter phone number"
+            type="number"
+            formControlName="phoneNumber"
+          ></ion-input>
+
+          <div
+            style="
+              position: relative;
+              display: flex;
+              flex-direction: row;
+              gap: 1rem;
+            "
+          >
+            <ion-input
+              mode="md"
+              label="Latitude"
+              label-placement="floating"
+              fill="outline"
+              type="number"
+              placeholder="Enter Latitude"
+              formControlName="latitude"
+            ></ion-input>
+
+            <ion-input
+              mode="md"
+              label="Longitude"
+              label-placement="floating"
+              fill="outline"
+              placeholder="Enter Longitude"
+              type="number"
+              formControlName="longitude"
+            ></ion-input>
+          </div>
+
+          <div style="position: relative; display: flex; justify-content: end">
+            <ion-button
+              color="secondary"
+              size="small"
+              (click)="currentPosition()"
+            >
+              <ion-icon src="../../assets/icon/location-outline.svg"></ion-icon>
+              <ion-label>Get your location</ion-label>
+            </ion-button>
+          </div>
+
+          <ion-footer style="display: flex; justify-content: center">
+            <ion-button
+              [disabled]="!userFormGroup.valid"
+              color="danger"
+              type="submit"
+              style="width: 50%"
+              >Save</ion-button
+            >
+
+            <ion-button
+            color="success"
+            style="width: 45%"
+            (click)="generateQRCode()"
+            id="open-modal"
+            [disabled]="latitude === '' || longitude === ''"
+            >Generate QR</ion-button
+          >
+          </ion-footer>
+        </ion-card-content>
+      </form>
+    </ion-card>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    <ion-modal #modal trigger="open-modal" [canDismiss]="canDismiss" [presentingElement]="presentingElement">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>{{school}} - QR</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="modal.dismiss()">Close</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          
+
+          <ion-list>
+            <ion-item>
+              <ion-input label="School Name" value="{{school}}" disabled="true"></ion-input>
+            </ion-item>
+          
+            <ion-item>
+              <ion-input label="School Address" value="{{address}}" disabled="true"></ion-input>
+            </ion-item>
+          
+            <ion-item>
+              <ion-input label="Phone number" value="{{phoneNumber}}" disabled="true"></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-card>
+            <ngx-kjua style="position: relative; display: flex; justify-content: center; align-items: center;"
+              text="{{qrLink}}"
+              [renderAsync]="false"
+              [render]="'svg'"
+              [crisp]="true"
+              [minVersion]="8"
+              [ecLevel]="'H'"
+              [size]="300"
+              [fill]="'#333'"
+              [back]="'#fff'"
+              [rounded]="100"
+              [quiet]="1"
+              [mode]="'plain'"
+              [mSize]="40"
+              [mPosX]="50"
+              [mPosY]="50"
+              [fontname]="'sans-serif'"
+              [fontcolor]="'#ff9818'"
+              [cssClass]="'image-auto'"
+            ></ngx-kjua>
+          </ion-card>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+
+
+
+
+  </ion-content>
+</ion-content>
