@@ -28,9 +28,17 @@ import {
 } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -69,27 +77,26 @@ import { CookieService } from 'ngx-cookie-service';
     IonFooter,
     IonText,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [CookieService],
+  providers: [AuthService, CookieService],
 })
 export class LoginPage implements OnInit {
   isLogin: boolean = false;
   userFormGroup!: FormGroup;
   constructor(
     private router: Router,
-    private cookieService: CookieService,
+    private authService: AuthService,
     private toastController: ToastController,
-    private formBuilder: FormBuilder 
+    private formBuilder: FormBuilder
   ) {
-
-
     this.userFormGroup = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      username: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
   ngOnInit(): void {
-    if (this.cookieService.get('token') == '') {
+    if (this.authService.loggedInUser() === false) {
       console.log('Not Authenticated');
     }
     /*
@@ -100,25 +107,24 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/tabs/home']);
   }
 
-  login() {
+  login(user: any) {
     // Implement your login logic here
     // This might involve sending login credentials to your backend API
-  
-    this.setCookie();
-    this.presentToast('bottom');
 
-    this.router.navigate(['/tabs/home']);
+    this.authService.login(user).subscribe(
+      (response) => {
+        this.presentToast('bottom', 'Successfully Logged In');
+        this.router.navigate(['/tabs/home']);
+      },
+      (error) => {
+        this.presentToast('bottom', 'Something went wrong. Please try again.');
+      }
+    );
   }
 
-  setCookie() {
-    let token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
-    this.cookieService.set('token', token, 30, '/', '', true, 'Strict'); // Adjust values as needed
-  }
-
-  async presentToast(position: any) {
+  async presentToast(position: any, message: string) {
     const toast = await this.toastController.create({
-      message: 'Successfully logged in!',
+      message: message,
       duration: 1500,
       position: position,
     });
@@ -126,10 +132,9 @@ export class LoginPage implements OnInit {
     await toast.present();
   }
 
-  onSubmit()
-  {
+  onSubmit() {
     if (this.userFormGroup.valid) {
-      console.log(this.userFormGroup.value);
+      this.login(this.userFormGroup.value);
     }
   }
 }

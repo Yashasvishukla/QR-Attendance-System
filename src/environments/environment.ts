@@ -4,9 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://localhost:7081/api/'
+  baseUrl: 'https://qr-attendance-system-backend.onrender.com/api/',
 };
-
 
 /*
  * For easier debugging in development mode, you can import the following file

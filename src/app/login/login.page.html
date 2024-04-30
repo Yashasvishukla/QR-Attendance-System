@@ -17,10 +17,11 @@
       >
         <ion-input
           mode="md"
-          label="Username/Email"
+          label="Email"
           label-placement="floating"
           fill="outline"
-          placeholder="Enter username/email"
+          placeholder="Enter email"
+          type="email"
           formControlName="username"
         ></ion-input>
 
@@ -34,16 +35,15 @@
           formControlName="password"
         ></ion-input>
       </ion-card-content>
+      <ion-footer style="display: flex; flex-direction: row">
+        <ion-button
+          [disabled]="!userFormGroup.valid"
+          color="primary"
+          type="submit"
+          >Login</ion-button
+        >
+        <ion-button routerLink="/register" color="danger">Register</ion-button>
+      </ion-footer>
     </form>
-
-    <ion-footer style="display: flex; flex-direction: row">
-      <ion-button
-        [disabled]="!userFormGroup.valid"
-        color="primary"
-        (click)="login()"
-        >Login</ion-button
-      >
-      <ion-button routerLink="/register" color="danger">Register</ion-button>
-    </ion-footer>
   </ion-card>
 </ion-content>
