@@ -1,7 +1,7 @@
 {
   "name": "attendence_system",
   "version": "0.0.1",
-  "author": "Ionic Framework",
+  "author": "Yashasvi Shukla",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^17.0.2",
     "@angular/platform-browser-dynamic": "^17.0.2",
     "@angular/router": "^17.0.2",
+    "@auth0/angular-jwt": "^5.2.0",
     "@capacitor/android": "^5.7.4",
     "@capacitor/app": "5.0.7",
     "@capacitor/camera": "^5.0.9",
@@ -71,5 +72,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.2.2"
   },
-  "description": "An Ionic project"
+  "description": "An Attendance system that will help an organization to keep track of the attendance of the employees."
 }
